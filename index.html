@@ -8,17 +8,28 @@
     <title>JavaScript Quiz</title>
 </head>
 <body>
-    <article class="question-container">
-        <div class="question">
-            <h2 class="question-text">Ask Question?</h2>
-        </div>
-        <div class="question-answers">
-            <button class="answer-option"></button>
-            <button class="answer-option"></button>
-            <button class="answer-option"></button>
-            <button class="answer-option"></button>
-        </div>
-    </article>
+    <header>
+        <a href="#">View high scores</a>
+        <span>Time: <span class="time-value"> 0 </span></span>
+    </header>
+    <main>
+        <!-- quiz intro page -->
+        <article class="quiz-intro">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <button class="start-quiz">Start Quiz</button>
+        </article>
+        <!-- questions -->
+        <article class="question-container hidden">
+            <div class="question">
+                <h2 class="question-text">Ask Question?</h2>
+                <button class="answer-option">Answer A</button>
+                <button class="answer-option">Answer A</button>
+                <button class="answer-option">Answer A</button>
+                <button class="answer-option">Answer A</button>
+            </div>
+        </article>
+    </main>
 
 
     <script src="./assets/js/main.js"></script>

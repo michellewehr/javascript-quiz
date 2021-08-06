@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+/* define colors commonly used */
+:root {
+  --dark-purple: rgb(53, 28, 117);
+  --light-purple: rgb(181, 75, 229);
+}
+/* header */
+header {
+  display: flex;
+  margin: 1rem;
+  padding: 0;
+  justify-content: space-between;
+}
+header a {
+  text-decoration: none;
+  color: var(--light-purple);
+}
+/*Quiz introduction page*/
+.quiz-intro {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  padding-top: 5rem;
+  font-size: 1.5rem;
+}
+
+/* Question container */
+.question-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.question {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.question h2 {
+  font-weight: bold;
+}
+/*Start quiz button & answer option buttons*/
+.start-quiz {
+  width: 8rem;
+}
+.start-quiz,
+.answer-option {
+  padding: 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--dark-purple);
+  color: white;
+  font-size: 1rem;
+  padding: 1rem;
+}
+.start-quiz:hover,
+.answer-option:hover {
+  background-color: var(--light-purple);
+}
+/*Hidden class*/
+.hidden {
+  display: none;
+}

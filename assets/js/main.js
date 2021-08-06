@@ -1,10 +1,34 @@
 var startBtnEl = document.querySelector(".start-quiz");
 var questionContainerEl = document.querySelector(".question-container");
-var questionTextEl = document.querySelector(".question-text");
-var answerAEl = document.querySelector("#answerA");
-var answerBEl = document.querySelector("#answerB");
-var answerCEl = document.querySelector("#answerC");
-var answerDEl = document.querySelector("#answerD");
+//question div
+var questionDivEl = document.createElement("div");
+questionDivEl.className = "question";
+//append question div El to question-container
+questionContainerEl.appendChild(questionDivEl);
+//question text
+var questionTextEl = document.createElement("h2");
+questionTextEl.className = "question-text";
+// answer-options
+var answerAEl = document.createElement("button");
+answerAEl.className = "answer-option";
+answerAEl.id = "answerA";
+var answerBEl = document.createElement("button");
+answerBEl.className = "answer-option";
+answerBEl.id = "answerB";
+var answerCEl = document.createElement("button");
+answerCEl.className = "answer-option";
+answerCEl.id = "answerC";
+var answerDEl = document.createElement("button");
+answerDEl.className = "answer-option";
+answerDEl.id = "answerD";
+//add questiontext to question div
+questionDivEl.appendChild(questionTextEl);
+//append answers to question div
+questionDivEl.appendChild(answerAEl);
+questionDivEl.appendChild(answerBEl);
+questionDivEl.appendChild(answerCEl);
+questionDivEl.appendChild(answerDEl);
+
 
 // Questions Array
 questions = [
@@ -17,20 +41,20 @@ questions = [
         correctAnswer: "Michelle"
     },
     questionTwo = {
-        question: "What is your name?",
-        answerA: "Michelle",
+        question: "What is your age?",
+        answerA: "28",
         answerB: "Lana",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "28"
     },
     questionThree = {
-        question: "What is your name?",
+        question: "What is your gender?",
         answerA: "Michelle",
         answerB: "Lana",
-        answerC: "Mila",
+        answerC: "female",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "female"
     },
     questionFour = {
         question: "What is your name?",
@@ -89,12 +113,15 @@ questions = [
         correctAnswer: "Michelle"
     }
 ]
+
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     showQuestions();
 }
 
 function showQuestions() {
+
+
     for(let i = 0; i < questions.length; i++) {
         console.log(questions[i])
         questionTextEl.textContent = questions[i].question;
@@ -104,6 +131,8 @@ function showQuestions() {
         answerDEl.textContent = questions[i].answerD;
         questionContainerEl.classList.remove("hidden");
     }
+    
+
 }
 
 startBtnEl.addEventListener("click", startQuiz);

@@ -12,15 +12,19 @@ questionTextEl.className = "question-text";
 var answerAEl = document.createElement("button");
 answerAEl.className = "answer-option";
 answerAEl.id = "answerA";
+answerAEl.type = "submit";
 var answerBEl = document.createElement("button");
 answerBEl.className = "answer-option";
 answerBEl.id = "answerB";
+answerBEl.type = "submit";
 var answerCEl = document.createElement("button");
 answerCEl.className = "answer-option";
 answerCEl.id = "answerC";
+answerCEl.type = "submit";
 var answerDEl = document.createElement("button");
 answerDEl.className = "answer-option";
 answerDEl.id = "answerD";
+answerDEl.type = "submit";
 //add questiontext to question div
 questionDivEl.appendChild(questionTextEl);
 //append answers to question div
@@ -120,8 +124,6 @@ function startQuiz() {
 }
 
 function showQuestions() {
-
-
     for(let i = 0; i < questions.length; i++) {
         console.log(questions[i])
         questionTextEl.textContent = questions[i].question;
@@ -131,8 +133,17 @@ function showQuestions() {
         answerDEl.textContent = questions[i].answerD;
         questionContainerEl.classList.remove("hidden");
     }
-    
-
 }
 
+function checkAnswer(){
+    var targetEl = event.target;
+    for(let i = 0; i< questions.length; i++) {
+        if(targetEl.textContent === questions[i].correctAnswer.value) {
+            console.log("correct!");
+        }
+    }
+}
+
+
+document.querySelector(".body").addEventListener("click", checkAnswer);
 startBtnEl.addEventListener("click", startQuiz);

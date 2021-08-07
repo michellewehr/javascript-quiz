@@ -12,19 +12,15 @@ questionTextEl.className = "question-text";
 var answerAEl = document.createElement("button");
 answerAEl.className = "answer-option";
 answerAEl.id = "answerA";
-answerAEl.type = "submit";
 var answerBEl = document.createElement("button");
 answerBEl.className = "answer-option";
 answerBEl.id = "answerB";
-answerBEl.type = "submit";
 var answerCEl = document.createElement("button");
 answerCEl.className = "answer-option";
 answerCEl.id = "answerC";
-answerCEl.type = "submit";
 var answerDEl = document.createElement("button");
 answerDEl.className = "answer-option";
 answerDEl.id = "answerD";
-answerDEl.type = "submit";
 //add questiontext to question div
 questionDivEl.appendChild(questionTextEl);
 //append answers to question div
@@ -35,8 +31,8 @@ questionDivEl.appendChild(answerDEl);
 
 
 // Questions Array
-questions = [
-    questionOne = {
+const questions = [
+   {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -44,7 +40,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionTwo = {
+   {
         question: "What is your age?",
         answerA: "28",
         answerB: "Lana",
@@ -52,7 +48,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "28"
     },
-    questionThree = {
+    {
         question: "What is your gender?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -60,7 +56,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "female"
     },
-    questionFour = {
+   {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -68,7 +64,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionFive = {
+    {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -76,7 +72,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionSix = {
+   {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -84,7 +80,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionSeven = {
+    {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -92,7 +88,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionEight = {
+    {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -100,7 +96,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionNine = {
+    {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -108,7 +104,7 @@ questions = [
         answerD: "Ava",
         correctAnswer: "Michelle"
     },
-    questionTen = {
+    {
         question: "What is your name?",
         answerA: "Michelle",
         answerB: "Lana",
@@ -118,30 +114,31 @@ questions = [
     }
 ]
 
+let currentQuestion = 0;
+let time = 100;
+let timeEl = document.querySelector(".time-value");
+timeEl.innerHTML = time;
+
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     showQuestions();
 }
 
 function showQuestions() {
-    for(let i = 0; i < questions.length; i++) {
-        console.log(questions[i])
-        questionTextEl.textContent = questions[i].question;
-        answerAEl.textContent = questions[i].answerA;
-        answerBEl.textContent = questions[i].answerB;
-        answerCEl.textContent = questions[i].answerC;
-        answerDEl.textContent = questions[i].answerD;
         questionContainerEl.classList.remove("hidden");
-    }
+        questionTextEl.textContent = questions[currentQuestion].question;
+        answerAEl.textContent = questions[currentQuestion].answerA;
+        answerBEl.textContent = questions[currentQuestion].answerB;
+        answerCEl.textContent = questions[currentQuestion].answerC;
+        answerDEl.textContent = questions[currentQuestion].answerD;
+        let correctAnswerEl = questions[currentQuestion].correctAnswer;
 }
 
-function checkAnswer(){
-    var targetEl = event.target;
-    for(let i = 0; i< questions.length; i++) {
-        if(targetEl.textContent === questions[i].correctAnswer.value) {
-            console.log("correct!");
-        }
-    }
+function checkAnswer(currentQuestion){
+    let targetEl = event.target;
+    console.log(targetEl);
+    questionContainerEl.classList.add("hidden");
+    showQuestions();
 }
 
 

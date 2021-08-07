@@ -1,4 +1,13 @@
+// set time to 100 to begin quiz with 100 (subtract 10 for each wrong answer)
+let time = 100;
+// show time on page
+let timeEl = document.querySelector(".time-value");
+timeEl.innerHTML = time;
+//set current question to index 0 of questions array
+let currentQuestion = 0;
+// get start button
 var startBtnEl = document.querySelector(".start-quiz");
+// get quetion container to append children to
 var questionContainerEl = document.querySelector(".question-container");
 //question div
 var questionDivEl = document.createElement("div");
@@ -25,7 +34,7 @@ var answerDEl = document.createElement("button");
 answerDEl.className = "answer-option";
 answerDEl.id = "answerD";
 answerDEl.type = "submit";
-//add questiontext to question div
+//append questiontext to question div
 questionDivEl.appendChild(questionTextEl);
 //append answers to question div
 questionDivEl.appendChild(answerAEl);
@@ -118,22 +127,12 @@ const questions = [
     }
 ]
 
-// set time to 100 to begin quiz with 100 (subtract 10 for each wrong answer)
-let time = 100;
-// show time on page
-let timeEl = document.querySelector(".time-value");
-timeEl.innerHTML = time;
-//set current question to index 0 of questions array
-let currentQuestion = 0;
-
-
-
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     showCurrentQuestion();
 }
-
+//show questions function
 function showCurrentQuestion() {
     questionContainerEl.classList.remove("hidden");
     questionTextEl.textContent = questions[currentQuestion].question;
@@ -142,7 +141,7 @@ function showCurrentQuestion() {
     answerCEl.textContent = questions[currentQuestion].answerC;
     answerDEl.textContent = questions[currentQuestion].answerD;
 }
-
+// when select an answer, check the answer if it is correct keep time as is, if incorrect subtract 10
 function checkAnswer() {
     let currentQuestionData = questions[currentQuestion]
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
@@ -156,6 +155,7 @@ function checkAnswer() {
     }
     showNextQuestion();
 }
+// if there are more questions in array show the next question, if not game over
 function showNextQuestion() {
     if (currentQuestion < questions.length -1){
         showCurrentQuestion(currentQuestion++);

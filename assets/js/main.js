@@ -43,26 +43,26 @@ const questions = [
    {
         question: "What is your age?",
         answerA: "28",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
+        answerB: "4",
+        answerC: "5",
+        answerD: "6",
         correctAnswer: "28"
     },
     {
         question: "What is your gender?",
-        answerA: "Michelle",
-        answerB: "Lana",
+        answerA: "male",
+        answerB: "non-binary",
         answerC: "female",
-        answerD: "Ava",
+        answerD: "goat",
         correctAnswer: "female"
     },
    {
-        question: "What is your name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Michelle"
+        question: "hi?",
+        answerA: "hello",
+        answerB: "bye",
+        answerC: "tush",
+        answerD: "butt",
+        correctAnswer: "hello"
     },
     {
         question: "What is your name?",
@@ -73,74 +73,108 @@ const questions = [
         correctAnswer: "Michelle"
     },
    {
-        question: "What is your name?",
+        question: "What is your middle name?",
         answerA: "Michelle",
-        answerB: "Lana",
+        answerB: "Napolitano",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "Napolitano"
     },
     {
-        question: "What is your name?",
-        answerA: "Michelle",
+        question: "What is your fish?",
+        answerA: "fish",
         answerB: "Lana",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "fish"
     },
     {
-        question: "What is your name?",
+        question: "What is Lanas name?",
         answerA: "Michelle",
         answerB: "Lana",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "Lana"
     },
     {
-        question: "What is your name?",
+        question: "What is Milas name?",
         answerA: "Michelle",
         answerB: "Lana",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "Mila"
     },
     {
-        question: "What is your name?",
+        question: "What is Avas name?",
         answerA: "Michelle",
         answerB: "Lana",
         answerC: "Mila",
         answerD: "Ava",
-        correctAnswer: "Michelle"
+        correctAnswer: "Ava"
     }
 ]
 
-let currentQuestion = 0;
+// set time to 100 to begin quiz with 100 (subtract 10 for each wrong answer)
 let time = 100;
+// show time on page
 let timeEl = document.querySelector(".time-value");
 timeEl.innerHTML = time;
+//set current question to index 0 of questions array
+let currentQuestion = 0;
 
+
+
+//when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
-    showQuestions();
+    showCurrentQuestion();
 }
 
-function showQuestions() {
-        questionContainerEl.classList.remove("hidden");
-        questionTextEl.textContent = questions[currentQuestion].question;
-        answerAEl.textContent = questions[currentQuestion].answerA;
-        answerBEl.textContent = questions[currentQuestion].answerB;
-        answerCEl.textContent = questions[currentQuestion].answerC;
-        answerDEl.textContent = questions[currentQuestion].answerD;
-        let correctAnswerEl = questions[currentQuestion].correctAnswer;
+function showCurrentQuestion() {
+    questionContainerEl.classList.remove("hidden");
+    questionTextEl.textContent = questions[currentQuestion].question;
+    answerAEl.textContent = questions[currentQuestion].answerA;
+    answerBEl.textContent = questions[currentQuestion].answerB;
+    answerCEl.textContent = questions[currentQuestion].answerC;
+    answerDEl.textContent = questions[currentQuestion].answerD;
 }
 
-function checkAnswer(currentQuestion){
-    let targetEl = event.target;
-    console.log(targetEl);
-    questionContainerEl.classList.add("hidden");
-    showQuestions();
+function checkAnswer() {
+    let currentQuestionData = questions[currentQuestion]
+    let correctAnswerEl = questions[currentQuestion].correctAnswer;
+    let target = event.target;
+    if (target.textContent === correctAnswerEl) {
+        console.log("Correct!");
+    } else {
+        console.log("Wrong!");
+        time = time - 10;
+        timeEl.innerHTML = time;
+    }
+    if (currentQuestion < questions.length){
+    showNextQuestion();
+    } else { alert("Game Over!");
+            }
+}
+
+function showNextQuestion() {
+    if (currentQuestion < questions.length){
+        showCurrentQuestion(currentQuestion++);
+    } else {
+        alert("game over!");
+    }
 }
 
 
-document.querySelector(".body").addEventListener("click", checkAnswer);
+    
+
+
+// function checkAnswer(currentQuestion){
+//     let targetEl = event.target;
+//     console.log(targetEl);
+//     questionContainerEl.classList.add("hidden");
+//     showQuestions();
+// }
+
+
+document.querySelector(".quiz-content").addEventListener("click", checkAnswer);
 startBtnEl.addEventListener("click", startQuiz);

@@ -43,6 +43,7 @@ questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
 
 
+
 // Questions Array
 const questions = [
    {
@@ -126,7 +127,7 @@ const questions = [
         correctAnswer: "Ava"
     }
 ]
-
+console.log(questions.length);
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
@@ -143,6 +144,7 @@ function showCurrentQuestion() {
 }
 // when select an answer, check the answer if it is correct keep time as is, if incorrect subtract 10
 function checkAnswer() {
+    console.log(currentQuestion);
     let currentQuestionData = questions[currentQuestion]
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
     let target = event.target;
@@ -153,15 +155,15 @@ function checkAnswer() {
         time = time - 10;
         timeEl.innerHTML = time;
     }
-    showNextQuestion();
-}
-// if there are more questions in array show the next question, if not game over
-function showNextQuestion() {
-    if (currentQuestion < questions.length -1){
+    // if no more questions in array or time is 0 then stop quiz, if not proceed
+    if (currentQuestion < questions.length -1 && time > 0){
         showCurrentQuestion(currentQuestion++);
-    } else { window.alert("Quiz Over!");
+    } if (time < 0 || currentQuestion === questions.length) { 
+        alert("Quiz over!");
+        questionContainerEl.classList.add(".hidden");
         }
 }
+
 
 
 document.querySelector(".quiz-content").addEventListener("click", checkAnswer);

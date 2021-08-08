@@ -43,6 +43,24 @@ questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
 //create end of quiz form
 var endOfQuizEl = document.querySelector(".end-quiz");
+//create text content for end of quiz form
+const formHeadingEl = document.createElement("h2");
+formHeadingEl.textContent = "All done!";
+const formPEl = document.createElement("p");
+formPEl.textContent = "Your final score is: " + time;
+const formLabelEl =document.createElement("label");
+formLabelEl.textContent = "Enter Initials: "
+const formInputEl = document.createElement("input");
+formInputEl.className = "initial-input";
+const formBtnEl = document.createElement("button");
+formBtnEl.className = "initial-btn";
+formBtnEl.type = "submit";
+formBtnEl.textContent = "Submit";
+endOfQuizEl.appendChild(formHeadingEl);
+endOfQuizEl.appendChild(formPEl);
+endOfQuizEl.appendChild(formLabelEl);
+endOfQuizEl.appendChild(formInputEl);
+endOfQuizEl.appendChild(formBtnEl);
 
 
 // Questions Array
@@ -161,37 +179,41 @@ function checkAnswer() {
         showCurrentQuestion(currentQuestion++);
     } else { 
         questionContainerEl.classList.add("hidden");
-        endOfQuizForm(time);
+        endOfQuizEl.classList.remove("hidden");
         }
+    return time;
 }
-// end of quiz form
-function endOfQuizForm() {
-    //create text content for end of quiz form
-    const formHeadingEl = document.createElement("h2");
-    formHeadingEl.textContent = "All done!";
-    const formPEl = document.createElement("p");
-    formPEl.textContent = "Your final score is: " + time;
-    const formLabelEl =document.createElement("label");
-    formLabelEl.textContent = "Enter Initials: "
-    const formInputEl = document.createElement("input");
-    formInputEl.className = "initial-input";
-    const formBtnEl = document.createElement("button");
-    formBtnEl.className = "initial-btn";
-    formBtnEl.type = "submit";
-    formBtnEl.textContent = "Sumbit";
-    endOfQuizEl.appendChild(formHeadingEl);
-    endOfQuizEl.appendChild(formPEl);
-    endOfQuizEl.appendChild(formLabelEl);
-    endOfQuizEl.appendChild(formInputEl);
-    endOfQuizEl.appendChild(formBtnEl);
+//get initials
+function getInitials() {
+    event.preventDefault();
+    let initials = formInputEl.value;
+    saveHighScore(initials, time)
+}
+
+function saveHighScore(initials, time) {
+    const highScoreArr = [];
+    let highScoreObj = 
+        {
+        initials: initials,
+        score: time
+        }
+    highScoreArr.push(highScoreObj);
+    console.log(highScoreArr);
+    localStorage.setItem("highScoreArr", JSON.stringify(highScoreArr));
+}
+
+function loadHighScores() {
+    let savedHighScores = localStorage.getItem("highScoreArr");
 }
 
 
+
+//when submit end of quiz form 
+formBtnEl.addEventListener("click", getInitials);
 //query selector all for question-answer-options to run function checkAnswer()
 var answerOptionEl = document.querySelectorAll(".answer-option");
 for(let option of answerOptionEl) {
     option.addEventListener("click", checkAnswer);
 }
-
-
+//when press button
 startBtnEl.addEventListener("click", startQuiz);

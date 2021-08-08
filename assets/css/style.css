@@ -122,6 +122,7 @@ button:hover {
   padding: 5px 0;
 }
 .leaderboard button {
+  margin: 1rem;
   margin-left: 0%;
   letter-spacing: 2;
 }

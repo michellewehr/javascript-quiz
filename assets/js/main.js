@@ -15,7 +15,7 @@ questionDivEl.className = "question";
 //append question div El to question-container
 questionContainerEl.appendChild(questionDivEl);
 //question text
-var questionTextEl = document.createElement("h2");
+var questionTextEl = document.createElement("h3");
 questionTextEl.className = "question-text";
 // answer-options
 var answerAEl = document.createElement("button");
@@ -41,6 +41,8 @@ questionDivEl.appendChild(answerAEl);
 questionDivEl.appendChild(answerBEl);
 questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
+//create end of quiz form
+var endOfQuizEl = document.querySelector(".end-quiz");
 
 
 
@@ -161,7 +163,29 @@ function checkAnswer() {
     } else { 
         alert("Quiz over!");
         questionContainerEl.classList.add("hidden");
+        endOfQuizForm(time);
         }
+}
+// end of quiz form
+function endOfQuizForm() {
+    //create text content for end of quiz form
+    const formHeadingEl = document.createElement("h2");
+    formHeadingEl.textContent = "All done!";
+    const formPEl = document.createElement("p");
+    formPEl.textContent = "Your final score is: " + time;
+    const formLabelEl =document.createElement("label");
+    formLabelEl.textContent = "Enter Initials: "
+    const formInputEl = document.createElement("input");
+    formInputEl.className = "initial-input";
+    const formBtnEl = document.createElement("button");
+    formBtnEl.className = "initial-btn";
+    formBtnEl.type = "submit";
+    formBtnEl.textContent = "Sumbit";
+    endOfQuizEl.appendChild(formHeadingEl);
+    endOfQuizEl.appendChild(formPEl);
+    endOfQuizEl.appendChild(formLabelEl);
+    endOfQuizEl.appendChild(formInputEl);
+    endOfQuizEl.appendChild(formBtnEl);
 }
 
 

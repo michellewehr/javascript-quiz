@@ -49,6 +49,7 @@ header a {
 .start-quiz {
   width: 8rem;
 }
+
 .start-quiz,
 .answer-option {
   padding: 1rem;
@@ -60,9 +61,37 @@ header a {
   font-size: 1rem;
   padding: 1rem;
 }
-.start-quiz:hover,
-.answer-option:hover {
+
+button:hover {
   background-color: var(--light-purple);
+}
+
+/* end quiz form*/
+.end-quiz h2 {
+  font-size: 2rem;
+}
+.end-quiz p {
+  font-size: 1.5rem;
+}
+.end-quiz label {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+/*initial button*/
+.initial-btn {
+  background-color: var(--dark-purple);
+  color: white;
+  border-radius: 10px;
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 1rem;
+  border: none;
+}
+/*initial input*/
+.initial-input {
+  height: 2rem;
+  width: 25%;
 }
 /*Hidden class*/
 .hidden {

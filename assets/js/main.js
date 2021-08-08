@@ -45,7 +45,6 @@ questionDivEl.appendChild(answerDEl);
 var endOfQuizEl = document.querySelector(".end-quiz");
 
 
-
 // Questions Array
 const questions = [
    {
@@ -161,7 +160,6 @@ function checkAnswer() {
     if (currentQuestion < questions.length -1 && time > 0){
         showCurrentQuestion(currentQuestion++);
     } else { 
-        alert("Quiz over!");
         questionContainerEl.classList.add("hidden");
         endOfQuizForm(time);
         }
@@ -189,6 +187,11 @@ function endOfQuizForm() {
 }
 
 
+//query selector all for question-answer-options to run function checkAnswer()
+var answerOptionEl = document.querySelectorAll(".answer-option");
+for(let option of answerOptionEl) {
+    option.addEventListener("click", checkAnswer);
+}
 
-document.querySelector(".quiz-content").addEventListener("click", checkAnswer);
+
 startBtnEl.addEventListener("click", startQuiz);

@@ -64,9 +64,19 @@ header a {
 
 button:hover {
   background-color: var(--light-purple);
+  cursor: pointer;
 }
-
+/*end of quiz container*/
+.end-quiz-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 /* end quiz form*/
+.end-quiz {
+  width: 50%;
+}
 .end-quiz h2 {
   font-size: 2rem;
 }
@@ -91,7 +101,7 @@ button:hover {
 /*initial input*/
 .initial-input {
   height: 2rem;
-  width: 25%;
+  width: 50%;
 }
 /*Hidden class*/
 .hidden {

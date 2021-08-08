@@ -44,7 +44,7 @@ questionDivEl.appendChild(answerDEl);
 //create end of quiz form
 var endOfQuizEl = document.querySelector(".end-quiz");
 //create text content for end of quiz form
-const formHeadingEl = document.createElement("h2");
+const formHeadingEl = document.createElement("h3");
 formHeadingEl.textContent = "All done!";
 const formPEl = document.createElement("p");
 formPEl.textContent = "Your final score is: " + time;
@@ -61,6 +61,25 @@ endOfQuizEl.appendChild(formPEl);
 endOfQuizEl.appendChild(formLabelEl);
 endOfQuizEl.appendChild(formInputEl);
 endOfQuizEl.appendChild(formBtnEl);
+//create leaderboard
+const leaderBoardEl = document.querySelector(".leaderboard");
+//create elements for leaderboard
+const leaderBoardHeaderEl = document.createElement("h3");
+leaderBoardHeaderEl.textContent = "High Scores";
+const leaderBoardOLEl = document.createElement("ol");
+const leaderBoardListItemEl = document.createElement("li");
+const leaderBoardGoBackBtnEl = document.createElement("button");
+leaderBoardGoBackBtnEl.className = "go-back";
+const leaderBoardResetBtnEl = document.createElement("button");
+leaderBoardResetBtnEl.className = "clear";
+leaderBoardResetBtnEl.type = "reset";
+leaderBoardEl.appendChild(leaderBoardHeaderEl);
+leaderBoardEl.appendChild(leaderBoardOLEl);
+leaderBoardOLEl.appendChild(leaderBoardListItemEl);
+leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
+leaderBoardEl.appendChild(leaderBoardResetBtnEl);
+
+
 
 
 // Questions Array
@@ -200,12 +219,28 @@ function saveHighScore(initials, time) {
     highScoreArr.push(highScoreObj);
     console.log(highScoreArr);
     localStorage.setItem("highScoreArr", JSON.stringify(highScoreArr));
+    loadHighScores();
 }
+
+
 
 function loadHighScores() {
     let savedHighScores = localStorage.getItem("highScoreArr");
+    if (!savedHighScores) {
+        return false;
+    } 
+    savedHighScores = JSON.parse(savedHighScores);
+    //for each saved high score display them on a leaderboard
+    for (let i = 0; i <= savedHighScores; i++) {
+        addToLeaderBoard(savedHighScores[i]);
+    } 
 }
 
+function addToLeaderBoard() {
+    endOfQuizEl.classList.add("hidden");
+    leaderBoardEl.classList.remove("hidden");
+    leaderBoardListItemEl.textContent = saveHighScore[i].initials + " - " + saveHighScore[i].time;
+}
 
 
 //when submit end of quiz form 

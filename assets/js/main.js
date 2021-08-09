@@ -233,6 +233,8 @@ function saveScore() {
 }
 
 function loadHighScores() {
+    document.querySelector(".quiz-intro").classList.add("hidden");
+    questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
 }
@@ -249,6 +251,9 @@ function loadHighScores() {
     
     // leaderBoardEl.classList.remove("hidden");
 
+
+//leader board go back button 
+leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
 
 //when submit end of quiz form 
 formBtnEl.addEventListener("click", saveScore);

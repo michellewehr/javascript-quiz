@@ -204,9 +204,6 @@ function checkAnswer() {
         formPEl.textContent = "Your final score is: " + time;
 }
 
-function saveHighScore() {
-    localStorage.setItem("highScores", JSON.stringify(highScoreArr));
-}
 
 //get initials
 function saveScore() {
@@ -226,14 +223,22 @@ function saveScore() {
     //save all highScore Data back to local storage
     highScoreArr.push(highScoreObj);
     saveHighScore();
+    loadHighScores();
+}
+//save in local storage
+function saveHighScore() {
+    localStorage.setItem("highScores", JSON.stringify(highScoreArr));
 }
 
 function loadHighScores() {
-    let savedHighScoreArr = localStorage.getItem("highScores");
+    var savedHighScoreArr = localStorage.getItem("highScores");
     if (!savedHighScoreArr) {
         return false;
     }
-    savedHighScoreArr = JSON.parse(localStorage.getItem(highScores));
+    console.log("saved high scores found!");
+    // else, load up saved high scores & parse into array of objects
+    savedHighScoreArr = JSON.parse(localStorage.getItem(savedHighScoreArr));
+    // loop through saved high score array and display on leaderboard
     for (let i = 0; i < savedHighScoreArr.length; i++) {
         let savedInitials = savedHighScoreArr[i].initials;
         let savedScore = savedHighScoreArr[i].score;
@@ -243,6 +248,7 @@ function loadHighScores() {
         leaderBoardOLEl.appendChild(leaderBoardListItemEl);
         leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
     }
+
     document.querySelector(".quiz-intro").classList.add("hidden");
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");

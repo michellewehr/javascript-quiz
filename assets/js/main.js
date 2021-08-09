@@ -79,6 +79,9 @@ leaderBoardEl.appendChild(leaderBoardHeaderEl);
 leaderBoardEl.appendChild(leaderBoardOLEl);
 leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
+//create array to hold high scores
+const highScoreArr = [];
+
 
 // Questions Array
 const questions = [
@@ -200,29 +203,36 @@ function checkAnswer() {
         }
         formPEl.textContent = "Your final score is: " + time;
 }
+
+function saveHighScore() {
+    localStorage.setItem("highScores", JSON.stringify(highScoreArr));
+}
+
 //get initials
 function saveScore() {
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
-    //get mostRecentScore/ time
+    //high score object
     let initials = formInputEl.value;
     if (!initials) {
         alert("You need to enter your initials to log your high score!");
         return;
     }
-    const highScoreArr = [];
     let highScoreObj = 
     {
         initials: initials,
         score: time
     };
+    //save all highScore Data back to local storage
     highScoreArr.push(highScoreObj);
-    localStorage.setItem("highScoreArr", JSON.stringify(highScoreArr));
-    console.log(highScoreArr);
-    let savedHighScoreArr = localStorage.getItem(highScoreArr);
-    for (let i = 0; i < highScoreArr.length; i++) {
-        let savedInitials = highScoreArr[i].initials;
-        let savedScore = highScoreArr[i].score;
+    saveHighScore();
+}
+
+function loadHighScores() {
+    let savedHighScoreArr = JSON.parse(localStorage.getItem("highScores"));
+    for (let i = 0; i < savedHighScoreArr.length; i++) {
+        let savedInitials = savedHighScoreArr[i].initials;
+        let savedScore = savedHighScoreArr[i].score;
         console.log(savedInitials);
         console.log(savedScore);
         let leaderBoardListItemEl = document.createElement("li");
@@ -230,31 +240,21 @@ function saveScore() {
         leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
     }
     loadHighScores();
-}
-
-function loadHighScores() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
 }
 
-
-    // //close the current page to show the leaderboard
-    // endOfQuizEl.classList.add("hidden");
-    // for(let i = 0; i < highScoreArr; i++) {
-    //     console.log(highScoreArr);
-    // }
-    // //    const leaderBoardListItemEl = document.createElement("li");
-    // //    leaderBoardOLEl.appendChild(leaderBoardListItemEl);
-    // //    leaderBoardListItemEl.innerHTML = "savedInitials <p> - </p> savedScore";
-    
-    // leaderBoardEl.classList.remove("hidden");
+function clearHighScores() {
+    localStorage.clear();
+}
 
 
 //leader board go back button 
 leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
-
+//lead board clear high scores button 
+leaderBoardResetBtnEl.addEventListener("click", clearHighScores);
 //when submit end of quiz form 
 formBtnEl.addEventListener("click", saveScore);
 //query selector all for question-answer-options to run function checkAnswer()

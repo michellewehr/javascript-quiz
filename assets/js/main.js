@@ -47,10 +47,11 @@ var endOfQuizEl = document.querySelector(".end-quiz");
 const formHeadingEl = document.createElement("h3");
 formHeadingEl.textContent = "All done!";
 const formPEl = document.createElement("p");
-formPEl.textContent = "Your final score is: " + time;
 const formLabelEl =document.createElement("label");
+formLabelEl.for = "initial-input";
 formLabelEl.textContent = "Enter Initials: "
 const formInputEl = document.createElement("input");
+formInputEl.id = "initial-input"
 formInputEl.className = "initial-input";
 const formBtnEl = document.createElement("button");
 formBtnEl.className = "initial-btn";
@@ -78,9 +79,6 @@ leaderBoardEl.appendChild(leaderBoardHeaderEl);
 leaderBoardEl.appendChild(leaderBoardOLEl);
 leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
-
-
-
 
 // Questions Array
 const questions = [
@@ -200,46 +198,56 @@ function checkAnswer() {
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         }
-    return time;
+        formPEl.textContent = "Your final score is: " + time;
 }
 //get initials
 function saveScore() {
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
+    //get mostRecentScore/ time
     let initials = formInputEl.value;
+    if (!initials) {
+        alert("You need to enter your initials to log your high score!");
+        return;
+    }
     const highScoreArr = [];
     let highScoreObj = 
-        {
+    {
         initials: initials,
         score: time
-        };
+    };
     highScoreArr.push(highScoreObj);
     localStorage.setItem("highScoreArr", JSON.stringify(highScoreArr));
-    loadHighScores(highScoreArr);
+    console.log(highScoreArr);
+    let savedHighScoreArr = localStorage.getItem(highScoreArr);
+    for (let i = 0; i < highScoreArr.length; i++) {
+        let savedInitials = highScoreArr[i].initials;
+        let savedScore = highScoreArr[i].score;
+        console.log(savedInitials);
+        console.log(savedScore);
+        let leaderBoardListItemEl = document.createElement("li");
+        leaderBoardOLEl.appendChild(leaderBoardListItemEl);
+        leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
+    }
+    loadHighScores();
 }
-
-
 
 function loadHighScores() {
-    let savedHighScores = localStorage.getItem("highScoreArr");
-    if (!savedHighScores) {
-        return false;
-    } 
-    savedHighScores = JSON.parse(savedHighScores);
-    console.log(savedHighScores);
-    //close the current page to show the leaderboard
     endOfQuizEl.classList.add("hidden");
-    //for each saved high score display them on a leaderboard
-  
-    for (let i = 0; i < savedHighScores; i++) {
-       let savedInitials = savedHighScores[i].initials;
-       let savedScore = savedHighScores[i].score;
-       const leaderBoardListItemEl = document.createElement("li");
-       leaderBoardOLEl.appendChild(leaderBoardListItemEl);
-       leaderBoardListItemEl.innerHTML = "savedInitials <p> - </p> savedScore";
-    } 
     leaderBoardEl.classList.remove("hidden");
 }
+
+
+    // //close the current page to show the leaderboard
+    // endOfQuizEl.classList.add("hidden");
+    // for(let i = 0; i < highScoreArr; i++) {
+    //     console.log(highScoreArr);
+    // }
+    // //    const leaderBoardListItemEl = document.createElement("li");
+    // //    leaderBoardOLEl.appendChild(leaderBoardListItemEl);
+    // //    leaderBoardListItemEl.innerHTML = "savedInitials <p> - </p> savedScore";
+    
+    // leaderBoardEl.classList.remove("hidden");
 
 
 //when submit end of quiz form 

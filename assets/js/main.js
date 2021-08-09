@@ -229,7 +229,11 @@ function saveScore() {
 }
 
 function loadHighScores() {
-    let savedHighScoreArr = JSON.parse(localStorage.getItem("highScores"));
+    let savedHighScoreArr = localStorage.getItem("highScores");
+    if (!savedHighScoreArr) {
+        return false;
+    }
+    savedHighScoreArr = JSON.parse(localStorage.getItem(highScores));
     for (let i = 0; i < savedHighScoreArr.length; i++) {
         let savedInitials = savedHighScoreArr[i].initials;
         let savedScore = savedHighScoreArr[i].score;
@@ -239,7 +243,6 @@ function loadHighScores() {
         leaderBoardOLEl.appendChild(leaderBoardListItemEl);
         leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
     }
-    loadHighScores();
     document.querySelector(".quiz-intro").classList.add("hidden");
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
@@ -251,8 +254,8 @@ function clearHighScores() {
 }
 
 
-//leader board go back button 
-leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
+// //leader board go back button 
+// leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
 //lead board clear high scores button 
 leaderBoardResetBtnEl.addEventListener("click", clearHighScores);
 //when submit end of quiz form 

@@ -253,17 +253,15 @@ function loadHighScores() {
     leaderBoardEl.classList.remove("hidden");
     }
 
-
-
-
 function clearHighScores() {
     localStorage.clear();
 }
 
-
-// //leader board go back button 
-// leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
-//lead board clear high scores button 
+//view high scores link
+document.querySelector(".view-high-scores").addEventListener("click", loadHighScores);
+//leader board go back button 
+leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
+// lead board clear high scores button 
 leaderBoardResetBtnEl.addEventListener("click", clearHighScores);
 //when submit end of quiz form 
 formBtnEl.addEventListener("click", saveScore);

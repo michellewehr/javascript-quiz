@@ -237,6 +237,9 @@ function saveHighScore() {
 function loadHighScores() {
     var highScores = localStorage.getItem("highScores");
     highScores = JSON.parse(highScores);
+    if (!highScores) {
+        return false;
+    }
     for(let i = 0; i < highScores.length; i++) {
         let savedInitials = highScores[i].initials;
         let savedScore = highScores[i].score;
@@ -248,21 +251,6 @@ function loadHighScores() {
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
-    // if (!highScores) {
-    //     return false;
-    // } else {
-    // // else, load up saved high scores & parse into array of objects
-    // highScores = JSON.parse(localStorage.getItem(highScores));
-    // // loop through saved high score array and display on leaderboard
-    // for (let i = 0; i < highScores.length; i++) {
-    //     let savedInitials = highScores[i].initials;
-    //     let savedScore = highScores[i].score;
-    //     console.log(savedInitials);
-    //     console.log(savedScore);
-    //     let leaderBoardListItemEl = document.createElement("li");
-    //     leaderBoardOLEl.appendChild(leaderBoardListItemEl);
-    //     leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
-    // }
     }
 
 

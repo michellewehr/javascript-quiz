@@ -210,7 +210,6 @@ function saveScore() {
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
     highScoreArr = localStorage.getItem("highScores") || [];
-    highScoreArr = JSON.parse(highScoreArr);
     //get initials
     let initials = formInputEl.value;
     if (!initials) {
@@ -224,6 +223,7 @@ function saveScore() {
         score: time
     };
     //add highScore object to array
+    highScoreArr = JSON.parse(highScoreArr);
     highScoreArr.push(highScoreObj);
     saveHighScore();
     loadHighScores();

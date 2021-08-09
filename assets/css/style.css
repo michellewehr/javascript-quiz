@@ -67,6 +67,7 @@ button:hover {
   cursor: pointer;
 }
 /*end of quiz container*/
+
 .end-quiz-container {
   display: flex;
   justify-content: center;
@@ -109,6 +110,8 @@ button:hover {
 .leaderboard {
   width: 50%;
   text-align: left;
+  margin-left: 25%;
+  margin-top: 10%;
 }
 .leaderboard h3 {
   font-size: 2rem;
@@ -126,6 +129,7 @@ button:hover {
   margin-left: 0%;
   letter-spacing: 2;
   cursor: pointer;
+  display: inline-block;
 }
 
 /*Hidden class*/

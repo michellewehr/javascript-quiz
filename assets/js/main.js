@@ -241,11 +241,18 @@ function saveHighScore() {
 }
 
 function loadHighScores() {
+    //get saved highscores
     var highScores = localStorage.getItem("highScores");
+    // turn highscores into an array
     highScores = JSON.parse(highScores);
+    highScores = highScores
+        .sort((a, b) => a.score - b.score)
+        .reverse()
+    //if there are no high scores, return out of function
     if (!highScores) {
         return false;
     }
+    //for each item in high scores array add as list element, show the list, hide the rest of the quiz elements
     for(let i = 0; i < highScores.length; i++) {
         let savedInitials = highScores[i].initials;
         let savedScore = highScores[i].score;

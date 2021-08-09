@@ -79,8 +79,8 @@ leaderBoardEl.appendChild(leaderBoardHeaderEl);
 leaderBoardEl.appendChild(leaderBoardOLEl);
 leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
-// //create array to hold high scores
-// let highScoreArr = [];
+//create array to hold high scores
+let highScoreArr = [];
 
 
 // Questions Array
@@ -207,56 +207,66 @@ function checkAnswer() {
 
 //get initials
 function saveScore() {
-    let highScoreArr = localStorage.getItem("highScores") || [];
-    highScoreArr = JSON.parse(highScoreArr);
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
-    //high score object
+    highScoreArr = localStorage.getItem("highScores") || [];
+    highScoreArr = JSON.parse(highScoreArr);
+    //get initials
     let initials = formInputEl.value;
     if (!initials) {
         alert("You need to enter your initials to log your high score!");
         return;
     }
+    //high score object
     let highScoreObj = 
     {
         initials: initials,
         score: time
     };
+    //add highScore object to array
     highScoreArr.push(highScoreObj);
     saveHighScore();
-    var savedHighScoreArr = localStorage.getItem("highScores");
-    if (!savedHighScoreArr) {
-        return false;
-    } else {
-    // else, load up saved high scores & parse into array of objects
-    savedHighScoreArr = JSON.parse(localStorage.getItem(savedHighScoreArr));
-    console.log(savedHighScoreArr)
-    
+    loadHighScores();
 }
+
 //save in local storage
 function saveHighScore() {
     localStorage.setItem("highScores", JSON.stringify(highScoreArr));
 }
 
 function loadHighScores() {
-  
-    // loop through saved high score array and display on leaderboard
-    for (let i = 0; i < savedHighScoreArr.length; i++) {
-        let savedInitials = savedHighScoreArr[i].initials;
-        let savedScore = savedHighScoreArr[i].score;
-        console.log(savedInitials);
-        console.log(savedScore);
+    var highScores = localStorage.getItem("highScores");
+    highScores = JSON.parse(highScores);
+    for(let i = 0; i < highScores.length; i++) {
+        let savedInitials = highScores[i].initials;
+        let savedScore = highScores[i].score;
         let leaderBoardListItemEl = document.createElement("li");
         leaderBoardOLEl.appendChild(leaderBoardListItemEl);
         leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
     }
-    }
-
     document.querySelector(".quiz-intro").classList.add("hidden");
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
-}
+    // if (!highScores) {
+    //     return false;
+    // } else {
+    // // else, load up saved high scores & parse into array of objects
+    // highScores = JSON.parse(localStorage.getItem(highScores));
+    // // loop through saved high score array and display on leaderboard
+    // for (let i = 0; i < highScores.length; i++) {
+    //     let savedInitials = highScores[i].initials;
+    //     let savedScore = highScores[i].score;
+    //     console.log(savedInitials);
+    //     console.log(savedScore);
+    //     let leaderBoardListItemEl = document.createElement("li");
+    //     leaderBoardOLEl.appendChild(leaderBoardListItemEl);
+    //     leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
+    // }
+    }
+
+
+
 
 function clearHighScores() {
     localStorage.clear();

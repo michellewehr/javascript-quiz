@@ -1,36 +1,32 @@
-// set time to 100 to begin quiz with 100 (subtract 10 for each wrong answer)
-let time = 100;
-// show time on page
-let timeEl = document.querySelector(".time-value");
-timeEl.innerHTML = time;
+
 //set current question to index 0 of questions array
 let currentQuestion = 0;
 // get start button
-var startBtnEl = document.querySelector(".start-quiz");
+const startBtnEl = document.querySelector(".start-quiz");
 // get quetion container to append children to
-var questionContainerEl = document.querySelector(".question-container");
+const questionContainerEl = document.querySelector(".question-container");
 //question div
-var questionDivEl = document.createElement("div");
+const questionDivEl = document.createElement("div");
 questionDivEl.className = "question";
 //append question div El to question-container
 questionContainerEl.appendChild(questionDivEl);
 //question text
-var questionTextEl = document.createElement("h3");
+const questionTextEl = document.createElement("h3");
 questionTextEl.className = "question-text";
 // answer-options
-var answerAEl = document.createElement("button");
+const answerAEl = document.createElement("button");
 answerAEl.className = "answer-option";
 answerAEl.id = "answerA";
 answerAEl.type = "submit";
-var answerBEl = document.createElement("button");
+const answerBEl = document.createElement("button");
 answerBEl.className = "answer-option";
 answerBEl.id = "answerB";
 answerBEl.type = "submit";
-var answerCEl = document.createElement("button");
+const answerCEl = document.createElement("button");
 answerCEl.className = "answer-option";
 answerCEl.id = "answerC";
 answerCEl.type = "submit";
-var answerDEl = document.createElement("button");
+const answerDEl = document.createElement("button");
 answerDEl.className = "answer-option";
 answerDEl.id = "answerD";
 answerDEl.type = "submit";
@@ -42,7 +38,7 @@ questionDivEl.appendChild(answerBEl);
 questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
 //create end of quiz form
-var endOfQuizEl = document.querySelector(".end-quiz");
+const endOfQuizEl = document.querySelector(".end-quiz");
 //create text content for end of quiz form
 const formHeadingEl = document.createElement("h3");
 formHeadingEl.textContent = "All done!";
@@ -166,11 +162,25 @@ const questions = [
         correctAnswer: "Ava"
     }
 ]
-console.log(questions.length);
+// set time to 5 minutes or 300 seconds to begin quiz with
+let time = 300;
+//target countdown element
+
+let timeEl = document.querySelector(".time-value");
+//call countDown function every second
+setInterval(countDown, 1000);
+//count down function
+function countDown() {
+    // show time on page
+    timeEl.innerHTML = time;
+    time--;
+}
+
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     showCurrentQuestion();
+    
 }
 //show questions function
 function showCurrentQuestion() {
@@ -192,7 +202,7 @@ function checkAnswer() {
     } else {
         console.log("Wrong!");
         time = time - 10;
-        timeEl.innerHTML = time;
+        timeEl.textContent = time;
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){

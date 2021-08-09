@@ -79,8 +79,8 @@ leaderBoardEl.appendChild(leaderBoardHeaderEl);
 leaderBoardEl.appendChild(leaderBoardOLEl);
 leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
-//create array to hold high scores
-const highScoreArr = [];
+// //create array to hold high scores
+// let highScoreArr = [];
 
 
 // Questions Array
@@ -207,6 +207,8 @@ function checkAnswer() {
 
 //get initials
 function saveScore() {
+    let highScoreArr = localStorage.getItem("highScores") || [];
+    highScoreArr = JSON.parse(highScoreArr);
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
     //high score object
@@ -220,10 +222,16 @@ function saveScore() {
         initials: initials,
         score: time
     };
-    //save all highScore Data back to local storage
     highScoreArr.push(highScoreObj);
     saveHighScore();
-    loadHighScores();
+    var savedHighScoreArr = localStorage.getItem("highScores");
+    if (!savedHighScoreArr) {
+        return false;
+    } else {
+    // else, load up saved high scores & parse into array of objects
+    savedHighScoreArr = JSON.parse(localStorage.getItem(savedHighScoreArr));
+    console.log(savedHighScoreArr)
+    
 }
 //save in local storage
 function saveHighScore() {
@@ -231,13 +239,7 @@ function saveHighScore() {
 }
 
 function loadHighScores() {
-    var savedHighScoreArr = localStorage.getItem("highScores");
-    if (!savedHighScoreArr) {
-        return false;
-    }
-    console.log("saved high scores found!");
-    // else, load up saved high scores & parse into array of objects
-    savedHighScoreArr = JSON.parse(localStorage.getItem(savedHighScoreArr));
+  
     // loop through saved high score array and display on leaderboard
     for (let i = 0; i < savedHighScoreArr.length; i++) {
         let savedInitials = savedHighScoreArr[i].initials;
@@ -247,6 +249,7 @@ function loadHighScores() {
         let leaderBoardListItemEl = document.createElement("li");
         leaderBoardOLEl.appendChild(leaderBoardListItemEl);
         leaderBoardListItemEl.innerHTML = savedInitials + " - " + savedScore;
+    }
     }
 
     document.querySelector(".quiz-intro").classList.add("hidden");

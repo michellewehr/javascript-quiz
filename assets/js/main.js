@@ -209,7 +209,6 @@ function checkAnswer() {
 function saveScore() {
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
-    highScoreArr = localStorage.getItem("highScores") || [];
     //get initials
     let initials = formInputEl.value;
     if (!initials) {
@@ -222,10 +221,17 @@ function saveScore() {
         initials: initials,
         score: time
     };
+    highScoreArr = localStorage.getItem("highScores");
+    if (!highScoreArr) {
+        highScoreArr = [];
+        highScoreArr.push(highScoreObj);
+        saveHighScore();
+    } else {
+        highScoreArr = JSON.parse(highScoreArr);
+        highScoreArr.push(highScoreObj);
+        saveHighScore();
+    }
     //add highScore object to array
-    highScoreArr = JSON.parse(highScoreArr);
-    highScoreArr.push(highScoreObj);
-    saveHighScore();
     loadHighScores();
 }
 
@@ -251,10 +257,12 @@ function loadHighScores() {
     questionContainerEl.classList.add("hidden");
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
+    leaderBoardOLEl.classList.remove("hidden");
     }
 
 function clearHighScores() {
     localStorage.clear();
+    leaderBoardOLEl.className = "hidden";
 }
 
 //view high scores link

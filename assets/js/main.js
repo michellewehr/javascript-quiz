@@ -38,6 +38,9 @@ questionDivEl.appendChild(answerAEl);
 questionDivEl.appendChild(answerBEl);
 questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
+// check answer element that comes up when click wrong/ correct answer
+var horizantalRuleEl = document.createElement("hr");
+var checkAnswerTextEl = document.createElement("h4");
 //create end of quiz form
 const endOfQuizEl = document.querySelector(".end-quiz");
 //create text content for end of quiz form
@@ -80,6 +83,8 @@ leaderBoardEl.appendChild(leaderBoardResetBtnEl);
 let highScoreArr = [];
 // create var interval variable to add the set/clear Interval methods
 var interval;
+//create var timeOut variable to add the set/clear timeout method for correct/wrong
+var timeOut;
 
 // Questions Array
 const questions = [
@@ -175,7 +180,7 @@ function countDownTimer() {
     //show time on page
     timeEl.innerHTML = time;
     time--; 
-    // when time hits 0, clear interval 
+    // when time hits 0, clear interval, stop quiz, and get initials
     if (time === 0) {
         clearInterval(interval);
         questionContainerEl.classList.add("hidden");
@@ -213,14 +218,16 @@ function checkAnswer() {
     let target = event.target;
     if (target.textContent === correctAnswerEl) {
         //TODO: show correct with hr under for a timed amount
-        console.log("Correct!");
+        
     } else {
         //TODO: show wrong with hr under for a timed amount
+        
         time = time - 10;
         timeEl.textContent = time;
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
+        clearTimeout(timeOut, 2000);
         showCurrentQuestion(currentQuestion++);
     } else {
         questionContainerEl.classList.add("hidden");
@@ -230,6 +237,14 @@ function checkAnswer() {
         }
 }
 
+// when answer is correct 
+//TODO:
+function isCorrect() {
+    
+    checkAnswerTextEl.textContent = "Correct!";
+    questionContainerEl.appendChild(horizantalRuleEl);
+    questionContainerEl.appendChild(checkAnswerTextEl);
+}
 
 
 //get initials, save initials with associated time in highScore array

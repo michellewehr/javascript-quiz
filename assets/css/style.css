@@ -31,9 +31,16 @@ header a {
 /* Question container */
 .question-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 80vh;
+  margin-top: 10%;
+}
+.question-container h4 {
+  font-size: 2rem;
+  font-weight: 200;
+  font-style: italic;
+  animation: linear;
 }
 .question {
   display: flex;

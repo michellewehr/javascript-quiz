@@ -40,13 +40,12 @@ header a {
 .question {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
+  text-align: left;
+  align-items: left;
 }
 .question h3 {
   font-weight: bold;
+  font-size: 2rem;
 }
 /*Start quiz button & answer option buttons*/
 .start-quiz {
@@ -64,7 +63,9 @@ header a {
   font-size: 1rem;
   padding: 1rem;
 }
-
+.answer-option {
+  text-align: left;
+}
 button:hover {
   background-color: var(--light-purple);
   cursor: pointer;

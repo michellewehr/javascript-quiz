@@ -89,88 +89,88 @@ var timer;
 // Questions Array
 const questions = [
    {
-        question: "What is your name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Michelle"
+        question: "What is an array in JavaScript?",
+        answerA: "A data structure used to represent a list of items",
+        answerB: "A variable",
+        answerC: "A value type",
+        answerD: "A type of operator",
+        correctAnswer: "A data structure used to represent a list of items"
     },
    {
-        question: "What is your age?",
-        answerA: "28",
-        answerB: "4",
-        answerC: "5",
-        answerD: "6",
-        correctAnswer: "28"
+        question: "When should you use the 'console.log()' method?",
+        answerA: "To display an interactive list of properties of the specified JavaScript object",
+        answerB: "To output a message to the browser console. It can be useful to use frequently to ensure your code is running correctly",
+        answerC: "To alert a user",
+        answerD: "To prompt a user's input",
+        correctAnswer: "To output a message to the browser console. It can be useful to use frequently to ensure your code is running correctly"
     },
     {
-        question: "What is your gender?",
-        answerA: "male",
-        answerB: "non-binary",
-        answerC: "female",
-        answerD: "goat",
-        correctAnswer: "female"
+        question: "What does the method 'console.dir()' do in JavaScript?",
+        answerA: "Shows the localStorage key, value pairs",
+        answerB: "Displays sessionStorage key, value pairs",
+        answerC: "Outputs a specified message to the browser console",
+        answerD: "Displays an interactive list of properties of the specified JavaScript object",
+        correctAnswer: "Displays an interactive list of properties of the specified JavaScript object"
     },
    {
-        question: "hi?",
-        answerA: "hello",
-        answerB: "bye",
-        answerC: "tush",
-        answerD: "butt",
-        correctAnswer: "hello"
+        question: "What is a function in JavaScript?",
+        answerA: "A data structure used to represent a list of items",
+        answerB: "Set of statments that perform a task or calculates a value",
+        answerC: "A datatype that returns either true or false",
+        answerD: "Any text inside double or single quotes",
+        correctAnswer: "set of statments that perform a task or calculates a value"
     },
     {
-        question: "What is your name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Michelle"
+        question: "Which of the following is an example of camel notation?",
+        answerA: "camelCase",
+        answerB: "CamelCase",
+        answerC: "camel-case",
+        answerD: "camel_CASE",
+        correctAnswer: "camelCase"
     },
    {
-        question: "What is your middle name?",
-        answerA: "Michelle",
-        answerB: "Napolitano",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Napolitano"
+        question: "In JavaScript, what does '===' mean?",
+        answerA: "Loose equality operator, it ensures that both values on either sides of the operator are of the same value. It is not concerned with the type.",
+        answerB: "'===' is not used in JavaScript.",
+        answerC: "Logical AND operator, checks that both values on either side of the operator are true.",
+        answerD: "Strict equality operator, it ensures that BOTH values on either sides of the operator are the same type & the same value.",
+        correctAnswer: "Strict equality operator, it ensures that BOTH values on either sides of the operator are the same type & the same value."
     },
     {
-        question: "What is your fish?",
-        answerA: "fish",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "fish"
+        question: "When would you use a for loop in JavaScript?",
+        answerA: "To run a sequence of instructions WHILE a condition is true",
+        answerB: "To run a sequence of instructions that will continuously run",
+        answerC: "To repeat an action a number of times",
+        answerD: "To call a function ONE time",
+        correctAnswer: "To repeat an action a number of times"
     },
     {
-        question: "What is Lanas name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Lana"
+        question: "What does the 'unshift()' method do in JavaScript?",
+        answerA: "Adds to the middle of an array",
+        answerB: "Adds to the beginning of an array",
+        answerC: "Adds to the end of an array",
+        answerD: "Iterates over an array",
+        correctAnswer: "Adds to the beginning of an array"
     },
     {
-        question: "What is Milas name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Mila"
+        question: "Which of the following methods remove the last element in an array?",
+        answerA: "splice()",
+        answerB: "pop()",
+        answerC: "join()",
+        answerD: "concat()",
+        correctAnswer: "pop()"
     },
     {
-        question: "What is Avas name?",
-        answerA: "Michelle",
-        answerB: "Lana",
-        answerC: "Mila",
-        answerD: "Ava",
-        correctAnswer: "Ava"
+        question: "What does the 'reduce()' method do?",
+        answerA: "Reduces all items in an array to a single value",
+        answerB: "Maps each item in an array to something else",
+        answerC: "Returns an array",
+        answerD: "Joins two arrays",
+        correctAnswer: "Reduces all items in an array to a single value"
     }
 ]
 // set time to 5 minutes or 300 seconds to begin quiz with
-let time = 50;
+let time = 100;
 //show time on intro page 
 let timeEl = document.querySelector(".time-value");
 timeEl.innerHTML = time;
@@ -183,7 +183,6 @@ function countDownTimer() {
     // when time hits 0, clear interval, stop quiz, and get initials
     if (time < 0) {
         clearInterval(timer);
-        time = 0;
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         formPEl.textContent = "Your final score is: " + time;
@@ -227,7 +226,6 @@ function checkAnswer(answer) {
                     checkAnswerTextEl.textContent = "";
                 }, 1000);
             } else {
-                time = time - 10;
                 timeEl.textContent = time;
                 checkAnswerTextEl.textContent = "Incorrect!";
                 setTimeout(function() {
@@ -237,7 +235,7 @@ function checkAnswer(answer) {
         }
     });
     // if no more questions in array or time is 0 then stop quiz, if not proceed
-    if (currentQuestion < questions.length -1 && time > 0){
+    if (currentQuestion < questions.length -1 && time >= 0){
         showCurrentQuestion(currentQuestion++);
     } else {
         questionContainerEl.classList.add("hidden");

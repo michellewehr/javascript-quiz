@@ -39,7 +39,7 @@ questionDivEl.appendChild(answerBEl);
 questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
 // check answer element that comes up when click wrong/ correct answer
-var horizantalRuleEl = document.createElement("hr");
+var horizantalRuleEl = document.createElement('hr');
 var checkAnswerTextEl = document.createElement("h4");
 //create end of quiz form
 const endOfQuizEl = document.querySelector(".end-quiz");
@@ -170,7 +170,7 @@ const questions = [
     }
 ]
 // set time to 5 minutes or 300 seconds to begin quiz with
-let time = 20;
+let time = 50;
 //show time on intro page 
 let timeEl = document.querySelector(".time-value");
 timeEl.innerHTML = time;
@@ -218,12 +218,18 @@ function checkAnswer() {
     let target = event.target;
     if (target.textContent === correctAnswerEl) {
         //TODO: show correct with hr under for a timed amount
-        
+        isCorrect();
+        timeOut = setTimeout( () => {
+            checkAnswerTextEl.className = "hidden";
+        }, 1000);
     } else {
         //TODO: show wrong with hr under for a timed amount
-        
         time = time - 10;
         timeEl.textContent = time;
+        isIncorrect();
+        timeOut = setTimeout( () => {
+            checkAnswerTextEl.className = "hidden";
+        }, 200);
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
@@ -237,12 +243,15 @@ function checkAnswer() {
         }
 }
 
+
 // when answer is correct 
-//TODO:
 function isCorrect() {
-    
     checkAnswerTextEl.textContent = "Correct!";
-    questionContainerEl.appendChild(horizantalRuleEl);
+    questionContainerEl.appendChild(checkAnswerTextEl);
+}
+// when answer is incorrect
+function isIncorrect() {
+    checkAnswerTextEl.textContent = "Incorrect!";
     questionContainerEl.appendChild(checkAnswerTextEl);
 }
 

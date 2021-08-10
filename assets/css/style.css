@@ -42,6 +42,9 @@ header a {
   font-style: italic;
   animation: linear;
 }
+.question-container hr {
+  color: green;
+}
 .question {
   display: flex;
   flex-direction: column;

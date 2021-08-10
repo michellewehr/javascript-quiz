@@ -175,6 +175,13 @@ function countDownTimer() {
     //show time on page
     timeEl.innerHTML = time;
     time--; 
+    // when time hits 0, clear interval 
+    if (time === 0) {
+        clearInterval(interval);
+        questionContainerEl.classList.add("hidden");
+        endOfQuizEl.classList.remove("hidden");
+        formPEl.textContent = "Your final score is: " + time;
+    }
 }
 
 
@@ -222,13 +229,7 @@ function checkAnswer() {
         clearInterval(interval);
         }
 }
-// if no time left then stop the timer
-if (time === 0 || time < 0) {
-    clearInterval(interval);
-    questionContainerEl.classList.add("hidden");
-    endOfQuizEl.classList.remove("hidden");
-    formPEl.textContent = "Your final score is: " + time;
-}
+
 
 
 //get initials, save initials with associated time in highScore array

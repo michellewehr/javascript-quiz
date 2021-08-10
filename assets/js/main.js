@@ -39,8 +39,9 @@ questionDivEl.appendChild(answerBEl);
 questionDivEl.appendChild(answerCEl);
 questionDivEl.appendChild(answerDEl);
 // check answer element that comes up when click wrong/ correct answer
-var horizantalRuleEl = document.createElement('hr');
 var checkAnswerTextEl = document.createElement("h4");
+//append checkAnswerTextEl to questionContainer El 
+questionContainerEl.appendChild(checkAnswerTextEl);
 //create end of quiz form
 const endOfQuizEl = document.querySelector(".end-quiz");
 //create text content for end of quiz form
@@ -81,10 +82,9 @@ leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
 //create array to hold high scores
 let highScoreArr = [];
-// create var interval variable to add the set/clear Interval methods
-var interval;
-//create var timeOut variable to add the set/clear timeout method for correct/wrong
-var timeOut;
+// create var interval variable to add the set/clear interval methods for countdown timer
+var timer;
+
 
 // Questions Array
 const questions = [
@@ -181,8 +181,9 @@ function countDownTimer() {
     timeEl.innerHTML = time;
     time--; 
     // when time hits 0, clear interval, stop quiz, and get initials
-    if (time === 0) {
-        clearInterval(interval);
+    if (time < 0) {
+        clearInterval(timer);
+        time = 0;
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         formPEl.textContent = "Your final score is: " + time;
@@ -193,7 +194,7 @@ function countDownTimer() {
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     // set interval for countdown in start quiz function so it doesn't run until button clicked
-    interval = setInterval(countDownTimer, 1000);
+    timer = setInterval(countDownTimer, 1000);
     // remove intro page 
     document.querySelector(".quiz-intro").classList.add("hidden");
     // show questions 
@@ -209,51 +210,35 @@ function showCurrentQuestion() {
     answerCEl.textContent = questions[currentQuestion].answerC;
     answerDEl.textContent = questions[currentQuestion].answerD;
 }
+
 // when select an answer, check the answer if it is correct, if incorrect subtract 10seconds from timer
 function checkAnswer() {
-    console.log(currentQuestion);
-    let currentQuestionData = questions[currentQuestion]
+    let currentQuestionData = questions[currentQuestion];
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
     // get click target to see which button was clicked to check if correct
     let target = event.target;
     if (target.textContent === correctAnswerEl) {
-        //TODO: show correct with hr under for a timed amount
-        isCorrect();
-        timeOut = setTimeout( () => {
-            checkAnswerTextEl.className = "hidden";
-        }, 1000);
+        //TODO: show correct 
+        checkAnswerTextEl.textContent = "Correct!";
     } else {
-        //TODO: show wrong with hr under for a timed amount
+        //TODO: show wrong 
         time = time - 10;
         timeEl.textContent = time;
-        isIncorrect();
-        timeOut = setTimeout( () => {
-            checkAnswerTextEl.className = "hidden";
-        }, 200);
+        checkAnswerTextEl.textContent = "Incorrect!";
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
-        clearTimeout(timeOut, 2000);
+        
         showCurrentQuestion(currentQuestion++);
     } else {
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         formPEl.textContent = "Your final score is: " + time;
-        clearInterval(interval);
+        clearInterval(timer);
         }
 }
 
 
-// when answer is correct 
-function isCorrect() {
-    checkAnswerTextEl.textContent = "Correct!";
-    questionContainerEl.appendChild(checkAnswerTextEl);
-}
-// when answer is incorrect
-function isIncorrect() {
-    checkAnswerTextEl.textContent = "Incorrect!";
-    questionContainerEl.appendChild(checkAnswerTextEl);
-}
 
 
 //get initials, save initials with associated time in highScore array
@@ -294,7 +279,7 @@ function saveHighScore() {
 
 //show high scores
 function loadHighScores() {
-    clearInterval(interval);
+    clearInterval(timer);
     //get saved highscores
     var highScores = localStorage.getItem("highScores");
     // turn highscores into an array

@@ -36,15 +36,7 @@ header a {
   height: 80vh;
   margin-top: 10%;
 }
-.question-container h4 {
-  font-size: 2rem;
-  font-weight: 200;
-  font-style: italic;
-  animation: linear;
-}
-.question-container hr {
-  color: green;
-}
+
 .question {
   display: flex;
   flex-direction: column;
@@ -144,7 +136,26 @@ button:hover {
   cursor: pointer;
   display: inline-block;
 }
-
+/* animation on correct/incorrect text*/
+@keyframes myAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.question-container h4 {
+  font-size: 2rem;
+  font-weight: 200;
+  font-style: italic;
+  animation-name: myAnimation;
+  animation-duration: 2000ms;
+  opacity: 0;
+}
 /*Hidden class*/
 .hidden {
   display: none;

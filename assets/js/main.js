@@ -1,4 +1,5 @@
-
+//view high scores anchor element on document
+let viewHighScoresEl = document.querySelector(".view-high-scores");
 //set current question to index 0 of questions array
 let currentQuestion = 0;
 // get start button
@@ -163,25 +164,29 @@ const questions = [
     }
 ]
 // set time to 5 minutes or 300 seconds to begin quiz with
-let time = 300;
-//target countdown element
-
+let time = 240;
+//show time on intro page 
 let timeEl = document.querySelector(".time-value");
+timeEl.innerHTML = time;
 //call countDown function every second
-setInterval(countDown, 1000);
-//count down function
-function countDown() {
-    // show time on page
+const countDownTimer = setInterval(function() {
+    //show time on page
     timeEl.innerHTML = time;
-    time--;
-}
+    time--; 
+    if (time <= 0) {
+        clearInterval(countDownTimer);
+    }
+}, 1000);
+//count down function
+
 
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
     document.querySelector(".quiz-intro").classList.add("hidden");
     showCurrentQuestion();
-    
+    countDown();
 }
+
 //show questions function
 function showCurrentQuestion() {
     questionContainerEl.classList.remove("hidden");
@@ -210,8 +215,9 @@ function checkAnswer() {
     } else { 
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
-        }
         formPEl.textContent = "Your final score is: " + time;
+        clearInterval(countDownTimer);
+        }
 }
 
 
@@ -275,6 +281,8 @@ function loadHighScores() {
     endOfQuizEl.classList.add("hidden");
     leaderBoardEl.classList.remove("hidden");
     leaderBoardOLEl.classList.remove("hidden");
+    // make sure can't click viewHighScoresEl twice
+    viewHighScoresEl.style.pointerEvents = "none";
     }
 
 function clearHighScores() {
@@ -282,8 +290,9 @@ function clearHighScores() {
     leaderBoardOLEl.className = "hidden";
 }
 
+
 //view high scores link
-document.querySelector(".view-high-scores").addEventListener("click", loadHighScores);
+viewHighScoresEl.addEventListener("click", loadHighScores);
 //leader board go back button 
 leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
 // lead board clear high scores button 

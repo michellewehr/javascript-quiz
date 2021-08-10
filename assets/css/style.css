@@ -17,6 +17,7 @@ header {
 header a {
   text-decoration: none;
   color: var(--light-purple);
+  cursor: pointer;
 }
 /*Quiz introduction page*/
 .quiz-intro {

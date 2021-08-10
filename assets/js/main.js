@@ -41,7 +41,7 @@ questionDivEl.appendChild(answerDEl);
 // check answer element that comes up when click wrong/ correct answer
 var checkAnswerTextEl = document.createElement("h4");
 //append checkAnswerTextEl to questionContainer El 
-questionContainerEl.appendChild(checkAnswerTextEl);
+questionDivEl.appendChild(checkAnswerTextEl);
 //create end of quiz form
 const endOfQuizEl = document.querySelector(".end-quiz");
 //create text content for end of quiz form

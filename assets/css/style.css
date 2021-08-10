@@ -137,24 +137,11 @@ button:hover {
   display: inline-block;
 }
 /* animation on correct/incorrect text*/
-@keyframes myAnimation {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 .question-container h4 {
   font-size: 2rem;
   font-weight: 200;
   font-style: italic;
-  animation-name: myAnimation;
-  animation-duration: 2000ms;
-  opacity: 0;
+  opacity: 0.4;
 }
 /*Hidden class*/
 .hidden {

@@ -228,7 +228,6 @@ function checkAnswer() {
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
-        
         showCurrentQuestion(currentQuestion++);
     } else {
         questionContainerEl.classList.add("hidden");
@@ -237,8 +236,6 @@ function checkAnswer() {
         clearInterval(timer);
         }
 }
-
-
 
 
 //get initials, save initials with associated time in highScore array

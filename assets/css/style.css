@@ -47,6 +47,14 @@ header a {
   font-weight: bold;
   font-size: 2rem;
 }
+
+/* correct/incorrect text*/
+.question-container h4 {
+  font-size: 2rem;
+  font-weight: 200;
+  font-style: italic;
+  opacity: 0.4;
+}
 /*Start quiz button & answer option buttons*/
 .start-quiz {
   width: 8rem;
@@ -65,6 +73,8 @@ header a {
 }
 .answer-option {
   text-align: left;
+  width: 80%;
+  flex-wrap: wrap;
 }
 button:hover {
   background-color: var(--light-purple);
@@ -137,13 +147,7 @@ button:hover {
   cursor: pointer;
   display: inline-block;
 }
-/* animation on correct/incorrect text*/
-.question-container h4 {
-  font-size: 2rem;
-  font-weight: 200;
-  font-style: italic;
-  opacity: 0.4;
-}
+
 /*Hidden class*/
 .hidden {
   display: none;

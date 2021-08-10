@@ -225,14 +225,14 @@ function checkAnswer(answer) {
                 checkAnswerTextEl.textContent = "Correct!";
                 setTimeout(function() {
                     checkAnswerTextEl.textContent = "";
-                }, 1000);
+                }, 3000);
             } else {
                 time -= 10;
                 timeEl.textContent = time;
                 checkAnswerTextEl.textContent = "Incorrect!";
                 setTimeout(function() {
                     checkAnswerTextEl.textContent = "";
-                }, 1000);
+                }, 3000);
             }
         }
     });
@@ -289,6 +289,14 @@ function loadHighScores() {
     clearInterval(timer);
     //get saved highscores
     var highScores = localStorage.getItem("highScores");
+    // if no highScores show empty 
+    if (!highScores) {
+        document.querySelector(".quiz-intro").classList.add("hidden");
+        questionContainerEl.classList.add("hidden");
+        endOfQuizEl.classList.add("hidden");
+        leaderBoardEl.classList.remove("hidden");
+        leaderBoardOLEl.classList.remove("hidden");
+    }
     // turn highscores into an array
     highScores = JSON.parse(highScores);
     highScores = highScores

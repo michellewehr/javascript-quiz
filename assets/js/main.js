@@ -168,23 +168,20 @@ let time = 240;
 //show time on intro page 
 let timeEl = document.querySelector(".time-value");
 timeEl.innerHTML = time;
-//call countDown function every second
-const countDownTimer = setInterval(function() {
+
+//count down function
+function countDownTimer() {
     //show time on page
     timeEl.innerHTML = time;
     time--; 
-    if (time <= 0) {
-        clearInterval(countDownTimer);
-    }
-}, 1000);
-//count down function
-
+}
 
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
+    //call countDown function within the startQuiz function so it doesn't start until the button is clicked 
+    setInterval(countDownTimer, 1000);
     document.querySelector(".quiz-intro").classList.add("hidden");
     showCurrentQuestion();
-    countDown();
 }
 
 //show questions function

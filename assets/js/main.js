@@ -182,6 +182,7 @@ function countDownTimer() {
     time--; 
     // when time hits 0, clear interval, stop quiz, and get initials
     if (time < 0) {
+        time = 0;
         clearInterval(timer);
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
@@ -226,6 +227,7 @@ function checkAnswer(answer) {
                     checkAnswerTextEl.textContent = "";
                 }, 1000);
             } else {
+                time -= 10;
                 timeEl.textContent = time;
                 checkAnswerTextEl.textContent = "Incorrect!";
                 setTimeout(function() {

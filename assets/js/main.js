@@ -212,20 +212,30 @@ function showCurrentQuestion() {
 }
 
 // when select an answer, check the answer if it is correct, if incorrect subtract 10seconds from timer
-function checkAnswer() {
+function checkAnswer(answer) {
     let currentQuestionData = questions[currentQuestion];
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
     // get click target to see which button was clicked to check if correct
     let target = event.target;
-    if (target.textContent === correctAnswerEl) {
-        //TODO: show correct 
-        checkAnswerTextEl.textContent = "Correct!";
-    } else {
-        //TODO: show wrong 
-        time = time - 10;
-        timeEl.textContent = time;
-        checkAnswerTextEl.textContent = "Incorrect!";
-    }
+    // turn node list of answer option Element into an array to be able to run set timeout for each new question 
+    var answerOptionArr = Array.apply(null, answerOptionEl);
+    answerOptionArr.forEach(element => {
+        if(element === target) {
+            if (target.textContent === correctAnswerEl) {
+                checkAnswerTextEl.textContent = "Correct!";
+                setTimeout(function() {
+                    checkAnswerTextEl.textContent = "";
+                }, 1000);
+            } else {
+                time = time - 10;
+                timeEl.textContent = time;
+                checkAnswerTextEl.textContent = "Incorrect!";
+                setTimeout(function() {
+                    checkAnswerTextEl.textContent = "";
+                }, 1000);
+            }
+        }
+    });
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
         showCurrentQuestion(currentQuestion++);

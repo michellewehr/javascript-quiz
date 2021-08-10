@@ -78,7 +78,8 @@ leaderBoardEl.appendChild(leaderBoardGoBackBtnEl);
 leaderBoardEl.appendChild(leaderBoardResetBtnEl);
 //create array to hold high scores
 let highScoreArr = [];
-
+// create var interval variable to add the set/clear Interval methods
+var interval;
 
 // Questions Array
 const questions = [
@@ -164,7 +165,7 @@ const questions = [
     }
 ]
 // set time to 5 minutes or 300 seconds to begin quiz with
-let time = 240;
+let time = 20;
 //show time on intro page 
 let timeEl = document.querySelector(".time-value");
 timeEl.innerHTML = time;
@@ -176,11 +177,14 @@ function countDownTimer() {
     time--; 
 }
 
+
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
-    //call countDown function within the startQuiz function so it doesn't start until the button is clicked 
-    setInterval(countDownTimer, 1000);
+    // set interval for countdown in start quiz function so it doesn't run until button clicked
+    interval = setInterval(countDownTimer, 1000);
+    // remove intro page 
     document.querySelector(".quiz-intro").classList.add("hidden");
+    // show questions 
     showCurrentQuestion();
 }
 
@@ -193,33 +197,42 @@ function showCurrentQuestion() {
     answerCEl.textContent = questions[currentQuestion].answerC;
     answerDEl.textContent = questions[currentQuestion].answerD;
 }
-// when select an answer, check the answer if it is correct keep time as is, if incorrect subtract 10
+// when select an answer, check the answer if it is correct, if incorrect subtract 10seconds from timer
 function checkAnswer() {
     console.log(currentQuestion);
     let currentQuestionData = questions[currentQuestion]
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
+    // get click target to see which button was clicked to check if correct
     let target = event.target;
     if (target.textContent === correctAnswerEl) {
+        //TODO: show correct with hr under for a timed amount
         console.log("Correct!");
     } else {
-        console.log("Wrong!");
+        //TODO: show wrong with hr under for a timed amount
         time = time - 10;
         timeEl.textContent = time;
     }
     // if no more questions in array or time is 0 then stop quiz, if not proceed
     if (currentQuestion < questions.length -1 && time > 0){
         showCurrentQuestion(currentQuestion++);
-    } else { 
+    } else {
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         formPEl.textContent = "Your final score is: " + time;
-        clearInterval(countDownTimer);
+        clearInterval(interval);
         }
+}
+// if no time left then stop the timer
+if (time === 0 || time < 0) {
+    clearInterval(interval);
+    questionContainerEl.classList.add("hidden");
+    endOfQuizEl.classList.remove("hidden");
+    formPEl.textContent = "Your final score is: " + time;
 }
 
 
-//get initials
-function saveScore() {
+//get initials, save initials with associated time in highScore array
+function getInitials() {
     //prevent the browswer from refreshing to show quiz intro
     event.preventDefault();
     //get initials
@@ -234,7 +247,9 @@ function saveScore() {
         initials: initials,
         score: time
     };
+    // get highScoreArray from localStorage to stop overwriting each refresh
     highScoreArr = localStorage.getItem("highScores");
+    // if nothing in highScoreArr/ 1st go-around, initialize empty array and  push object; if not-- turn the localStorage item back into array and push item, run saveHighScore function to save it so next go-around it is there
     if (!highScoreArr) {
         highScoreArr = [];
         highScoreArr.push(highScoreObj);
@@ -244,7 +259,6 @@ function saveScore() {
         highScoreArr.push(highScoreObj);
         saveHighScore();
     }
-    //add highScore object to array
     loadHighScores();
 }
 
@@ -253,7 +267,9 @@ function saveHighScore() {
     localStorage.setItem("highScores", JSON.stringify(highScoreArr));
 }
 
+//show high scores
 function loadHighScores() {
+    clearInterval(interval);
     //get saved highscores
     var highScores = localStorage.getItem("highScores");
     // turn highscores into an array
@@ -282,20 +298,21 @@ function loadHighScores() {
     viewHighScoresEl.style.pointerEvents = "none";
     }
 
+// when clear high score button is pressed clear highscores
 function clearHighScores() {
     localStorage.clear();
     leaderBoardOLEl.className = "hidden";
 }
 
 
-//view high scores link
+//view high scores link click
 viewHighScoresEl.addEventListener("click", loadHighScores);
 //leader board go back button 
 leaderBoardGoBackBtnEl.addEventListener("click", reload => reload = location.reload());
 // lead board clear high scores button 
 leaderBoardResetBtnEl.addEventListener("click", clearHighScores);
 //when submit end of quiz form 
-formBtnEl.addEventListener("click", saveScore);
+formBtnEl.addEventListener("click", getInitials);
 //query selector all for question-answer-options to run function checkAnswer()
 var answerOptionEl = document.querySelectorAll(".answer-option");
 for(let option of answerOptionEl) {

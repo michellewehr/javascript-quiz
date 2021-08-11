@@ -182,8 +182,8 @@ function countDownTimer() {
     time--; 
     // when time hits 0, clear interval, stop quiz, and get initials
     if (time < 0) {
-        time = 0;
         clearInterval(timer);
+        time = 0;
         questionContainerEl.classList.add("hidden");
         endOfQuizEl.classList.remove("hidden");
         formPEl.textContent = "Your final score is: " + time;
@@ -246,13 +246,13 @@ function checkAnswer(answer) {
         }
 }
 
-
 //get initials, save initials with associated time in highScore array
 function getInitials() {
-    //prevent the browswer from refreshing to show quiz intro
+    //prevent the browswer from refreshing 
     event.preventDefault();
     //get initials
     let initials = formInputEl.value;
+    //validate input
     if (!initials) {
         alert("You need to enter your initials to log your high score!");
         return;
@@ -327,7 +327,6 @@ function clearHighScores() {
     localStorage.clear();
     leaderBoardOLEl.className = "hidden";
 }
-
 
 //view high scores link click
 viewHighScoresEl.addEventListener("click", loadHighScores);

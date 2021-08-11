@@ -14,4 +14,4 @@
 
 Made with ❤️ by Michelle Napolitano Wehr
 
-![image](.assets/javascript-quiz-screenshot.png)
+![image](./assets/javascriptQuizScreenshot.png)

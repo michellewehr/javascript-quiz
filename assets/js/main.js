@@ -85,7 +85,6 @@ let highScoreArr = [];
 // create var interval variable to add the set/clear interval methods for countdown timer
 var timer;
 
-
 // Questions Array
 const questions = [
    {
@@ -169,6 +168,7 @@ const questions = [
         correctAnswer: "Reduces all items in an array to a single value"
     }
 ]
+
 // set time to 5 minutes or 300 seconds to begin quiz with
 let time = 100;
 //show time on intro page 
@@ -189,7 +189,6 @@ function countDownTimer() {
         formPEl.textContent = "Your final score is: " + time;
     }
 }
-
 
 //when press start button- start quiz function (remove quiz intro section and show quiz)
 function startQuiz() {
@@ -217,7 +216,7 @@ function checkAnswer(answer) {
     let correctAnswerEl = questions[currentQuestion].correctAnswer;
     // get click target to see which button was clicked to check if correct
     let target = event.target;
-    // turn node list of answer option Element into an array to be able to run set timeout for each new question 
+    // turn node list of answer option Element into an array to be able to run set timeout for each new question to show Correct/incorrect
     var answerOptionArr = Array.apply(null, answerOptionEl);
     answerOptionArr.forEach(element => {
         if(element === target) {

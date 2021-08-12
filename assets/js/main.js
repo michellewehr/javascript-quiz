@@ -169,7 +169,7 @@ const questions = [
     }
 ]
 
-// set time to 5 minutes or 300 seconds to begin quiz with
+// set time to 100seconds, 10 seconds per question so that if you get them all wrong its a 0
 let time = 100;
 //show time on intro page 
 let timeEl = document.querySelector(".time-value");
@@ -227,7 +227,7 @@ function checkAnswer(answer) {
                 }, 3000);
             } else {
                 time -= 10;
-                timeEl.textContent = time;
+                timeEl.textContent = time + 1;
                 checkAnswerTextEl.textContent = "Incorrect!";
                 setTimeout(function() {
                     checkAnswerTextEl.textContent = "";
@@ -248,23 +248,23 @@ function checkAnswer(answer) {
 
 //get initials, save initials with associated time in highScore array
 function getInitials() {
-    //prevent the browswer from refreshing 
+    //prevent the browswer from refreshing
     event.preventDefault();
     //get initials
     let initials = formInputEl.value;
     //validate input
     if (!initials) {
-        alert("You need to enter your initials to log your high score!");
+        alert("You need to enter your initials to save your score!");
         return;
     }
     //high score object
-    let highScoreObj = 
+    let highScoreObj =
     {
         initials: initials,
         score: time
     };
     // get highScoreArray from localStorage to stop overwriting each refresh
-    highScoreArr = localStorage.getItem("highScores");
+    highScoreArr = localStorage.getItem('highScores');
     // if nothing in highScoreArr/ 1st go-around, initialize empty array and  push object; if not-- turn the localStorage item back into array and push item, run saveHighScore function to save it so next go-around it is there
     if (!highScoreArr) {
         highScoreArr = [];
@@ -277,12 +277,10 @@ function getInitials() {
     }
     loadHighScores();
 }
-
 //save in local storage
 function saveHighScore() {
-    localStorage.setItem("highScores", JSON.stringify(highScoreArr));
+    localStorage.setItem('highScores', JSON.stringify(highScoreArr));
 }
-
 //show high scores
 function loadHighScores() {
     clearInterval(timer);

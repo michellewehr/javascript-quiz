@@ -136,7 +136,7 @@ button:hover {
   margin-bottom: 0;
 }
 .leaderboard ol {
-  background-color: rgb(216, 211, 231);
+  /* background-color: rgb(216, 211, 231); */
   padding-left: 1.5rem;
 }
 .leaderboard li {

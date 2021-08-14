@@ -1,9 +1,9 @@
 # JavaScript-Quiz
 
-![image](./assets/javascriptQuizScreenshot.png)
-
 ## Description
 This application is a timed, javascript multiple choice quiz that returns users' scores with users' entered initials.
+
+![image](./assets/javascriptQuizScreenshot.png)
 
 ## Installation
 Simply click the link to deploy the website to deploy the quiz.
@@ -21,6 +21,12 @@ The purpose of this application is to display a timed multiple choice quiz in wh
 * https://michellewehr.github.io/javascript-quiz/
 
 ## Contribution
-Made with ❤️ by Michelle Napolitano Wehr
+Anyone is welcome to contribute to this project. To do so, clone the local repository to your local workspace.
+
+## Sources
+UCONN's School of Engineering Coding bootcamp provided the mock-up in which the author based the project off of.
+
+## Author
+Michelle Wehr Napolitano
 
 
